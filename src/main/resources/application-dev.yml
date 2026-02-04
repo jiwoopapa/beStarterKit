@@ -1,0 +1,14 @@
+# ─── Dev 프로필 (docker-compose PostgreSQL) ──────
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/starter_dev
+    username: starter_user
+    password: starter_pass
+    driver-class-name: org.postgresql.Driver
+
+  jpa:
+    show-sql: true
+
+springdoc:
+  swagger-ui:
+    enabled: true

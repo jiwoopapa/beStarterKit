@@ -1,0 +1,25 @@
+# ─── 공통 설정 ───────────────────────────────────
+server:
+  port: 8080
+
+spring:
+  jpa:
+    hibernate:
+      ddl-auto: none  # Flyway가 스키마 관리
+
+  flyway:
+    locations: classpath:db/migration
+
+# ─── SpringDoc / Swagger ─────────────────────────
+springdoc:
+  swagger-ui:
+    path: /swagger-ui
+  api-docs:
+    path: /v3/api-docs
+
+# ─── Actuator ────────────────────────────────────
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health
