@@ -131,7 +131,9 @@ Spring Boot + Kotlin 프로젝트의 보안 취약점을 자동으로 분석하�
 2. 각 카테고리별로 파일 검색 및 패턴 매칭
 3. 발견된 취약점을 우선순위별로 정렬
 4. 콘솔에 컬러풀한 리포트 출력
-5. 선택적으로 `docs/security-report-YYYYMMDD.md` 파일로 저장
+5. **자동으로** `docs/security-report-YYYYMMDD-HHMMSS.md` 파일로 저장
+   - 예: `docs/security-report-20260208-143025.md`
+   - 같은 날 여러 번 실행해도 시간으로 구분됨
 
 ---
 
