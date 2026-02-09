@@ -1,0 +1,39 @@
+{
+  "permissions": {
+    "allow": [
+      "WebFetch(domain:endoflife.date)",
+      "WebSearch",
+      "Bash(brew install:*)",
+      "Bash(gradle wrapper:*)",
+      "Bash(./gradlew build:*)",
+      "Bash(unzip:*)",
+      "Bash(./gradlew compileKotlin:*)",
+      "Bash(./gradlew test:*)",
+      "Bash(./gradlew dependencies:*)",
+      "Bash(git add:*)",
+      "Bash(git commit -m \"$\\(cat <<''EOF''\nchore: 프로젝트 빌드 및 Gradle wrapper 세팅\n\n- Kotlin 2.1.0 + Spring Boot 3.4.1 + Gradle 8.12.1 wrapper 구성\n- Java toolchain 23, jvmTarget JVM_23 설정\n- 주요 의존성: spring-boot-starter-web/data-jpa/validation,\n  springdoc-openapi, flyway-core, postgresql, H2 \\(테스트용\\)\n- .gitignore 추가 \\(.gradle/, build/, .idea/, .env\\)\n\nCo-Authored-By: Claude Sonnet 4.5 <noreply@anthropic.com>\nEOF\n\\)\")",
+      "Bash(git commit -m \"$\\(cat <<''EOF''\nfeat: 인프라 및 DB 설정 구성\n\n- docker-compose.yml: PostgreSQL 16-alpine 컨테이너 정의\n  \\(starter_user / starter_dev, healthcheck pg_isready\\)\n- .env.example: dev/prod DB 환경변수 템플릿\n- application.yml: 공통 설정 \\(port 8080, Flyway, Swagger, Actuator\\)\n- application-dev.yml: docker-compose DB 연결 + show-sql\n- application-prod.yml: 환경변수 기반 DB, HikariCP 튜닝, Swagger 비활성\n- V1__create_users_table.sql: users 테이블 + username/email 인덱스\n\nCo-Authored-By: Claude Sonnet 4.5 <noreply@anthropic.com>\nEOF\n\\)\")",
+      "Bash(git commit:*)",
+      "Bash(tree:*)",
+      "Bash(gh auth:*)",
+      "Bash(gh api:*)",
+      "Bash(git remote add:*)",
+      "Bash(git push:*)",
+      "Bash(./gradlew compileTestKotlin:*)",
+      "Bash(git rm:*)"
+    ]
+  },
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "{ printf '[%s] ' \"$(date '+%Y-%m-%d %H:%M:%S')\"; cat | jq -r '\"명령어: \\(.tool_input.command // \"N/A\") | 설명: \\(.tool_input.description // \"설명 없음\")\"' 2>/dev/null || echo '명령어 정보 파싱 실패'; } >> .claude/bash-command-log.txt"
+          }
+        ]
+      }
+    ]
+  }
+}
